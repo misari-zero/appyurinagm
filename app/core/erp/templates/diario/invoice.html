@@ -1,0 +1,117 @@
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>#}
+{#<style>#}
+{#    .header_frame {#}
+{#        left: 15pt;#}
+{#        width: 270pt;#}
+{#        top: 20pt;#}
+{#        height: 40pt;#}
+{#    }#}
+{##}
+{#    .content_frame {#}
+{#        left: 15pt;#}
+{#        width: 270pt;#}
+{#        top: 50pt;#}
+{#        height: 100vh;#}
+{#    }#}
+{##}
+{#    .footer_frame {#}
+{#        -pdf-frame-content: footer_content;#}
+{#        left: 15pt;#}
+{#        width: 270pt;#}
+{#        top: 772pt;#}
+{#        height: 20pt;#}
+{#    }#}
+{##}
+{#    .img-invoice {#}
+{#        width: 50px;#}
+{#        text-align: center;#}
+{#        margin: 0 auto;#}
+{#    }#}
+{##}
+{#    .head {#}
+{#        text-align: center;#}
+{#        text-transform: uppercase;#}
+{#    }#}
+{##}
+{#    #invoice thead tr th {#}
+{#        text-align: left;#}
+{#        border-bottom: 1px solid black;#}
+{#        border-top: 1px solid black;#}
+{#        padding-top: 4px;#}
+{#    }#}
+{##}
+{#    #invoice thead tr {#}
+{#        margin-bottom: 0;#}
+{#        padding-bottom: 0;#}
+{#    }#}
+{##}
+{#    #invoice tbody tr {#}
+{#        padding: 0;#}
+{#    }#}
+{##}
+{#    .text-center {#}
+{#        text-align: center;#}
+{#    }#}
+{#</style>#}
+{#<body>#}
+{#<img src="{{ icon }}" class="img-invoice">#}
+{#<p>#}
+{#    {{ comp.name|upper }}<br>#}
+{#    {{ comp.ruc }}<br>#}
+{#    {{ comp.address|upper }}#}
+{#</p>#}
+{#<p>#}
+{#    <b>Nro Doc:</b> {{ diario.nro }}<br>#}
+{#    <b>AÑO:</b> {{ diario.ano }}<br>#}
+{#    <b>MES:</b> {{ diario.mes }}<br>#}
+{#</p>#}
+{#<table id="invoice">#}
+{#    <thead>#}
+{#    <tr>#}
+{#        <th style="width: 10%;">NRO</th>#}
+{#        <th style="width: 10%;">FECHA DE REGISTRO</th>#}
+{#        <th style="width: 25%;">CUENTA</th>#}
+{#        <th style="width: 25%;">DESCRIPCION</th>#}
+{#        <th style="width: 15%;">DEBE</th>#}
+{#        <th style="width: 15%;">HABER</th>#}
+{#    </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#    {% for d in diario.all %}#}
+{#        <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>#}
+{#            <td>{{ d.nro }}</td>#}
+{#            <td>{{ d.date_joined }}</td>#}
+{#            <td>{{ d.cuenta }}</td>#}
+{#            <td>{{ d.desc }}</td>#}
+{#            <td>{{ d.debe }}</td>#}
+{#            <td>{{ d.haber }}</td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#    <tr style="border-top: 1px solid black; padding-top: 4px;">#}
+{#        <td colspan="4"><b>CUENTA</b></td>#}
+{#        <td style="text-align: right">S/.{{ diario.cuenta.name }}</td>#}
+{#    </tr>#}
+{#    <tr style="padding-top: 0px;">#}
+{#        <td colspan="4"><b>DEBE</b></td>#}
+{#        <td style="text-align: right">S/.{{ diario.debe }}</td>#}
+{#    </tr>#}
+{#    <tr style="padding-top: 0px;">#}
+{#        <td colspan="4"><b>HABER</b></td>#}
+{#        <td style="text-align: right">S/.{{ diario.haber }}</td>#}
+{#    </tr>#}
+{#    </tbody>#}
+{#</table>#}
+{#<table style="margin-top: 250px;">#}
+{#    <thead>#}
+{#    <tr>#}
+{#        <th>****GRACIAS POR SU COMPRA****</th>#}
+{#    </tr>#}
+{#    <tr>#}
+{#        <th>NOSE ACEPTAN CAMBIOS NI DEVOLUCIONES</th>#}
+{#    </tr>#}
+{#    </thead>#}
+{#</table>#}
+{#</body>#}
+{#</html>#}

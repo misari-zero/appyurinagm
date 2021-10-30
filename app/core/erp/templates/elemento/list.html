@@ -1,0 +1,34 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 20%">Nro</th>
+        <th scope="col" style="width: 20%">Numero elemento</th>
+        <th scope="col" style="width: 40%">Nombre</th>
+        <th scope="col" style="width: 20%">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+    {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.id }}</td>
+            <td>{{ obj.nro }}</td>
+            <td>{{ obj.name }}</td>
+            <td class="text-center">
+                <a href="{% url 'erp:elemento_update' obj.id %}" class="btn btn-warning btn-xs btn-flat">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'erp:elemento_delete' obj.id %}" class="btn btn-danger btn-xs btn-flat">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+{#        <script type="text/javascript">#}
+{#            $(".Collapsable").click(function () {#}
+{#                $(this).parent().children().toggle();#}
+{#                $(this).toggle();#}
+{#            });#}
+{#        </script>#}
+    {% endfor %}
+{% endblock %}

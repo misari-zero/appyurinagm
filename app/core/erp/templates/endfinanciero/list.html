@@ -1,0 +1,25 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+    <script src="{% static 'endfinanciero/js/list.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 5%">Nro</th>
+        <th scope="col" style="width: 10%">Fecha de registro</th>
+        <th scope="col" style="width: 25%">Obligaciones Financieras</th>
+        <th scope="col" style="width: 25%">Ventas Netas</th>
+        <th scope="col" style="width: 25%">Endeudamiento Financiero</th>
+        <th scope="col" style="width: 10%">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
