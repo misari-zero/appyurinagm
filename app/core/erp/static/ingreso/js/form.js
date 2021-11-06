@@ -1,7 +1,6 @@
 var tblProjects;
 var ingre = {
     items: {
-        doc: '',
         cli: '',
         date_joined: '',
         date_venc: '',
@@ -15,7 +14,7 @@ var ingre = {
         var igv = $('input[name="igv"]').val();
         $.each(this.items.projects, function (pos, dict) {
             dict.pos = pos;
-            dict.subtotal = dict.cant * parseFloat(dict.precio);
+            dict.subtotal = dict.cant * parseFloat(dict.pre);
             subtotal += dict.subtotal;
         });
         this.items.subtotal = subtotal;
@@ -41,7 +40,7 @@ var ingre = {
                 {"data": "id"},
                 {"data": "name"},
                 // {"data": "cate.name"},
-                {"data": "precio"},
+                {"data": "pre"},
                 {"data": "cant"},
                 {"data": "subtotal"},
             ],
@@ -105,15 +104,15 @@ function formatRepo(repo) {
     var option = $(
         '<div class="wrapper container">' +
         '<div class="row">' +
-        '<div class="col-lg-1">' +
-        '<img src="' + repo.image + '" class="img-fluid img-thumbnail d-block mx-auto rounded">' +
-        '</div>' +
+        // '<div class="col-lg-1">' +
+        // '<img src="' + repo.image + '" class="img-fluid img-thumbnail d-block mx-auto rounded">' +
+        // '</div>' +
         '<div class="col-lg-11 text-left shadow-sm">' +
         //'<br>' +
         '<p style="margin-bottom: 0;">' +
         '<b>Nombre:</b> ' + repo.name + '<br>' +
         // '<b>Categoría:</b> ' + repo.cate.name + '<br>' +
-        '<b>Precio:</b> <span class="badge badge-warning">S/.' + repo.precio + '</span>' +
+        '<b>Precio:</b> <span class="badge badge-warning">S/.' + repo.pre + '</span>' +
         '</p>' +
         '</div>' +
         '</div>' +
@@ -156,36 +155,36 @@ $(function () {
         .val(0.18);
 
     //search products
-    /*$('input[name="search"]').autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: window.location.pathname,
-                type: 'POST',
-                data: {
-                    'action': 'search_products',
-                    'term': request.term
-                },
-                dataType: 'json',
-            }).done(function (data) {
-                response(data);
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                //alert(textStatus + ': ' + errorThrown);
-            }).always(function (data) {
-
-            });
-        },
-        delay: 500,
-        minLength: 1,
-        select: function (event, ui) {
-            event.preventDefault();
-            console.clear();
-            ui.item.cant = 1;
-            ui.item.subtotal = 0.00;
-            console.log(vents.items);
-            vents.add(ui.item);
-            $(this).val('');
-        }
-    });*/
+    // $('input[name="search"]').autocomplete({
+    //     source: function (request, response) {
+    //         $.ajax({
+    //             url: window.location.pathname,
+    //             type: 'POST',
+    //             data: {
+    //                 'action': 'search_projects',
+    //                 'term': request.term
+    //             },
+    //             dataType: 'json',
+    //         }).done(function (data) {
+    //             response(data);
+    //         }).fail(function (jqXHR, textStatus, errorThrown) {
+    //             //alert(textStatus + ': ' + errorThrown);
+    //         }).always(function (data) {
+    //
+    //         });
+    //     },
+    //     delay: 500,
+    //     minLength: 1,
+    //     select: function (event, ui) {
+    //         event.preventDefault();
+    //         console.clear();
+    //         ui.item.cant = 1;
+    //         ui.item.subtotal = 0.00;
+    //         console.log(vents.items);
+    //         vents.add(ui.item);
+    //         $(this).val('');
+    //     }
+    // });
 
     $('.btnRemoveAll').on('click', function () {
         if (ingre.items.projects.length === 0) return false;

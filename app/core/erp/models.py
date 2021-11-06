@@ -118,25 +118,30 @@ class Plancontable(models.Model):
 # signals.post_save.connect(update_debe, sender=Plancontable, dispatch_uid="update_debe_count")
 
 # class AsientoContable(models.Model):
-#     nro = models.IntegerField()
-#     ano = (('2020'), ('2021'), ('2022'), ('2023'), ('2024'), ('2025'))
-#     mes = (('ENERO'), ('FEBRERO'), ('MARZO'), ('ABRIL'), ('MAYO'), ('JUNIO'), ('JUlIO'), ('AGOSTO'), ('SEPTIEMBRE'), ('OCTUBRE'), ('NOVIEMBRE'), ('DICIEMBRE'))
+#     nro = models.IntegerField(max_digits=5, verbose_name='#Asiento')
+#     fecha = models.DateField(default=datetime.now, verbose_name='Fecha')
+#     glosario = models.CharField(max_length=120, verbose_name='Glosa')
+#     doc = models.IntegerField(max_digits=8, verbose_name='Documento')
+#     tipo_doc = models.CharField(max_length=120, verbose_name='Tipo de Documento')
 #     cuenta = models.ForeignKey(Plancontable, on_delete=models.CASCADE, verbose_name='CUENTA')
 #     detalle = models.CharField(max_length=120, verbose_name='DETALLE DE CUENTA')
 #     debe = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='DEBE')
 #     haber = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='HABER')
-#     subtotal1 = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='SUBTOTAL1')silvia shirley cardenas
-#     subtotal2 = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='SUBTOTAL2')
 #
 #     def __str__(self):
-#         return self.cuenta
+#         return self.glosario
 #
 #     class Meta:
 #         verbose_name = 'Asiento'
 #         verbose_name_plural = 'Asientos'
 #         ordering = ['id']
 #
-
+#     def toJSON(self):
+#         item = model_to_dict(self)
+#         item['fecha'] = self.fecha.strftime('%Y-%m-%d')
+#         item['glosario'] = self.cli.toJSON()
+#         item['glosario'] = format(self.pre, '.2f')
+#         return item
 
 class Categoria(BaseModel):
     name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
@@ -432,3 +437,51 @@ class Endfinanciero(models.Model):
         verbose_name = 'Endeudamiento'
         verbose_name_plural = 'Endeudamientos'
         ordering = ['id']
+
+class RentaActivo(models.Model):
+    utineta = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Utilidad Neta')
+    actitotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Activo Total')
+    rentaactivo = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name="Rentabilida sobre Activo")
+    date_joined = models.DateField(default=datetime.now, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return self.utineta
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['utineta'] = format(self.utineta, '.2f')
+        item['actitotal'] = format(self.actitotal, '.2f')
+        item['rentaactivo'] = format(self.rentaactivol, '.2f')
+        item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+        return item
+
+    class Meta:
+        verbose_name = 'RentaActivo'
+        verbose_name_plural = 'RentaActivos'
+        ordering = ['id']
+
+class RentaPatrimonio(models.Model):
+    utineta = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Utilidad Neta')
+    patritotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Patrimonio Total')
+    rentapatrimonio = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    date_joined = models.DateField(default=datetime.now, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return self.utineta
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['utineta'] = format(self.utineta, '.2f')
+        item['patritotal'] = format(self.patritotal, '.2f')
+        item['rentaactivo'] = format(self.rentaactivo, '.2f')
+        item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+
+    class Meta:
+        verbose_name = 'RentaPatrimonio'
+        verbose_name_plural = 'RentaPatrimonios'
+        ordering = ['id']
+
+def update_rentapatrimonio(sender, instance, **kwargs):
+    instance.rentapatrimonio == (instance.utineta / instance.patritotal)*100
+    instance.rentapatrimonio.save()
+signals.post_save.connect(update_rentapatrimonio, sender=RentaPatrimonio, dispatch_uid="update_rentapatrimonio")

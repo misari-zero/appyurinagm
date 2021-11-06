@@ -15,6 +15,7 @@ from core.erp.views.categoria.views import *
 from core.erp.views.project.views import ProjectListView, ProjectCreateView, ProjectUpdateView, ProjectDeleteView
 from core.erp.views.proveedor.views import ProveedorListView, ProveedorCreateView, ProveedorUpdateView, \
     ProveedorDeleteView
+from core.erp.views.rentaactivo.views import *
 from core.erp.views.tipocuenta.views import *
 from core.erp.views.sale.views import SaleListView, \
     SaleCreateView, SaleDeleteView, SaleUpdateView, SaleInvoicePdfView
@@ -100,4 +101,9 @@ urlpatterns = [
     path('endfinanciero/add/', EndfinancieroCreateView.as_view(), name='endfinanciero_create'),
     path('endfinanciero/delete/<int:pk>/', EndfinancieroDeleteView.as_view(), name='endfinanciero_delete'),
     path('endfinanciero/update/<int:pk>/', EndfinancieroUpdateView.as_view(), name='endfinanciero_update'),
+    # rentabilidad activo
+    path('rentaactivo/list/', RentaActivoListView.as_view(), name='rentaactivo_list'),
+    path('rentaactivo/add/', RentaActivoCreateView.as_view(), name='rentaactivo_create'),
+    path('rentaactivo/update/<int:pk>/', RentaActivoUpdateView.as_view(), name='rentaactivo_update'),
+    path('rentaactivo/delete/<int:pk>/', RentaActivoDeleteView.as_view(), name='proveedor_delete'),
 ]

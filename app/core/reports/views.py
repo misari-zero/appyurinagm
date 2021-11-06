@@ -36,7 +36,7 @@ class ReportIngresoView(TemplateView):
                 for s in search:
                     data.append([
                         s.id,
-                        s.cli.names,
+                        s.cli.name,
                         s.date_joined.strftime('%Y-%m-%d'),
                         format(s.subtotal, '.2f'),
                         format(s.igv, '.2f'),

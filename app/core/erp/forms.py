@@ -2,7 +2,7 @@ from datetime import datetime
 from django.forms import *
 
 from core.erp.models import Client, Product, Categoria, Plancontable, Elemento, Diario, Tipocuenta, Mayor, Proveedor, \
-    Sale, Endfinanciero, Project, Ingreso
+    Sale, Endfinanciero, Project, Ingreso, RentaActivo
 
 
 class ClientForm(ModelForm):
@@ -38,10 +38,10 @@ class ClientForm(ModelForm):
                                       }
                                       ),
             'fecha_termino': DateInput(format='%Y-%m-%d',
-                                      attrs={
-                                          'value': datetime.now().strftime('%Y-%m-%d'),
-                                      }
-                                      ),
+                                       attrs={
+                                           'value': datetime.now().strftime('%Y-%m-%d'),
+                                       }
+                                       ),
         }
 
     def save(self, commit=True):
@@ -55,6 +55,7 @@ class ClientForm(ModelForm):
         except Exception as e:
             data['error'] = str(e)
         return data
+
 
 class ProveedorForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -109,6 +110,7 @@ class ProveedorForm(ModelForm):
             data['error'] = str(e)
         return data
 
+
 class ProjectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -137,15 +139,15 @@ class ProjectForm(ModelForm):
                 }
             ),
             'fecha_inicio': DateInput(format='%Y-%m-%d',
-                               attrs={
-                                   'value': datetime.now().strftime('%Y-%m-%d'),
-                               }
-                               ),
+                                      attrs={
+                                          'value': datetime.now().strftime('%Y-%m-%d'),
+                                      }
+                                      ),
             'fecha_registro': DateInput(format='%Y-%m-%d',
-                               attrs={
-                                   'value': datetime.now().strftime('%Y-%m-%d'),
-                               }
-                               ),
+                                        attrs={
+                                            'value': datetime.now().strftime('%Y-%m-%d'),
+                                        }
+                                        ),
         }
 
     def save(self, commit=True):
@@ -442,6 +444,7 @@ class IngresoForm(ModelForm):
             })
         }
 
+
 # class ComprobanteingresoForm(ModelForm):
 #     def __init__(self, *args, **kwargs):
 #         super().__init__(*args, **kwargs)
@@ -623,6 +626,53 @@ class EndfinancieroForm(ModelForm):
         fields = '__all__'
         widgets = {
             'mes': Select(),
+            'date_joined': DateInput(format='%Y-%m-%d',
+                                     attrs={
+                                         'value': datetime.now().strftime('%Y-%m-%d'),
+                                     }
+                                     ),
+        }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
+
+class RentaActivoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # for form in self.visible_fields():
+        #     form.field.widget.attrs['class'] = 'form-control'
+        #     form.field.widget.attrs['autocomplete'] = 'off'
+        self.fields['utineta'].widget.attrs['autofocus'] = True
+        # self.fields['fecha'].widget.format = '%d/%m/%Y'
+
+    class Meta:
+        model = RentaActivo
+        fields = '__all__'
+        widgets = {
+            # 'utineta': TextInput(
+            #     attrs={
+            #         # 'class': 'form-control',
+            #         'placeholder': 'Ingrese la utilidad neta',
+            #         # 'autocomplete': 'off'
+            #     }
+            # ),
+            # 'actitotal': TextInput(
+            #     attrs={
+            #         # 'class': 'form-control',
+            #         'placeholder': 'Ingrese el activo total',
+            #         # 'autocomplete': 'off'
+            #     }
+            # ),
             'date_joined': DateInput(format='%Y-%m-%d',
                                      attrs={
                                          'value': datetime.now().strftime('%Y-%m-%d'),

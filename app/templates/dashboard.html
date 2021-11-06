@@ -28,7 +28,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Balance General'
+                text: 'Rentabilidad sobre Activo'
             },
             subtitle: {
                 text: 'Reporte de columnas'
@@ -53,7 +53,7 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Debe/Haber S/.'
+                    text: 'ROA %.'
                 }
             },
             tooltip: {
@@ -71,7 +71,7 @@
                 }
             },
             series: [{
-                name: 'Porcentaje debe',
+                name: 'Porcentaje ROA',
                 showInLegend: false,
                 colorByPoint: true,
                 data: {{ graph_sales_year_month|safe }}
@@ -83,80 +83,70 @@
                     data: {{ graph_sales_year_month2|safe }}
                 }],
         });
-
-        var graphbar = Highcharts.chart('container-bar', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Endeudamiento Financiero'
-            },
-            subtitle: {
-                text: 'Reporte de barras'
-            },
-            xAxis: {
-                categories: [
-                    '19/10/20',
-                    '20/10/20',
-                    '21/10/20',
-                    '22/10/20',
-                    '23/10/20',
-                    '24/10/20',
-                    '26/10/20',
-                    '27/10/20',
-                    '28/10/20',
-                    '29/10/20',
-                    '30/10/20',
-                    '31/10/20',
-                    '02/11/20',
-                    '03/11/20',
-                    '04/11/20',
-                    '05/11/20',
-                    '06/11/20',
-                    '07/11/20',
-                    '09/11/20',
-                    '10/11/20',
-                    '11/11/20',
-                    '12/11/20',
-                    '13/11/20',
-                    '14/11/20',
-                    '16/11/20',
-                    '17/11/20',
-                    '18/11/20',
-                    '19/11/20',
-                    '20/11/20',
-                    '21/11/20',
-                ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Endeudamiento %.'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>%. {point.y:.1f}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Porcentaje Endeudamiento',
-                showInLegend: false,
-                colorByPoint: true,
-                data: {{ get_graph_endeudamiento|safe }}
-            },],
-        });
     </script>
+
+{#    <script type="application/javascript">#}
+{#        var graphcolumn = Highcharts.chart('container', {#}
+{#            chart: {#}
+{#                type: 'column'#}
+{#            },#}
+{#            title: {#}
+{#                text: 'Balance General'#}
+{#            },#}
+{#            subtitle: {#}
+{#                text: 'Reporte de columnas'#}
+{#            },#}
+{#            xAxis: {#}
+{#                categories: [#}
+{#                    'Enero',#}
+{#                    'Febrero',#}
+{#                    'Marzo',#}
+{#                    'Abril',#}
+{#                    'Mayo',#}
+{#                    'Junio',#}
+{#                    'Julio',#}
+{#                    'Agosto',#}
+{#                    'Septiembre',#}
+{#                    'Octubre',#}
+{#                    'Noviembre',#}
+{#                    'Diciembre'#}
+{#                ],#}
+{#                crosshair: true#}
+{#            },#}
+{#            yAxis: {#}
+{#                min: 0,#}
+{#                title: {#}
+{#                    text: 'Debe/Haber S/.'#}
+{#                }#}
+{#            },#}
+{#            tooltip: {#}
+{#                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',#}
+{#                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +#}
+{#                    '<td style="padding:0"><b>S/.{point.y:.1f}</b></td></tr>',#}
+{#                footerFormat: '</table>',#}
+{#                shared: true,#}
+{#                useHTML: true#}
+{#            },#}
+{#            plotOptions: {#}
+{#                column: {#}
+{#                    pointPadding: 0.2,#}
+{#                    borderWidth: 0#}
+{#                }#}
+{#            },#}
+{#            series: [{#}
+{#                name: 'Porcentaje debe',#}
+{#                showInLegend: false,#}
+{#                colorByPoint: true,#}
+{#                data: {{ graph_sales_year_month|safe }}#}
+{#            },#}
+{#                {#}
+{#                    name: 'Porcentaje haber',#}
+{#                    showInLegend: false,#}
+{#                    colorByPoint: true,#}
+{#                    data: {{ graph_sales_year_month2|safe }}#}
+{#                }],#}
+{#        });#}
+{#    </script>#}
 
     {#    <script type="application/javascript">#}
     {#        Highcharts.chart('container-bar', {#}
@@ -232,5 +222,4 @@
     {#            },],#}
     {#        });#}
     {#    </script>#}
-
 {% endblock %}

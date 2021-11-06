@@ -1,0 +1,25 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+    <script src="{% static 'proveedor/js/list.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 10%">Nro</th>
+        <th scope="col" style="width: 40%">Rentabilidad sobre Activo</th>
+        <th scope="col" style="width: 40%">F. Registro</th>
+{#        <th scope="col" style="width: 10%">Sexo</th>#}
+{#        <th scope="col" style="width: 5%">Estado</th>#}
+        <th scope="col" style="width: 10%">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
